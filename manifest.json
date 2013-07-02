@@ -1,0 +1,36 @@
+{
+	"manifest_version": 2,
+
+	"name": "Readable Arabic",
+	"description": "Makes Arabic a little more readable on the web",
+	"version": "1.0",
+	"background": {
+		"page": "background.html"
+	},
+
+
+	"permissions": [
+		"tabs",
+		"http://*/*",
+		"https://*/*",
+		"http://localhost/"
+	],
+
+	"content_scripts" : [
+    {
+      "matches" : [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js" : ["jquery.js","/HL/highlight.js", "script.js"],
+      "css" : ["arabic.css"],
+      "run_at" : "document_idle",
+      "all_frames" : true
+    }
+  ],
+
+	"page_action":{
+		"default_icon": "icon.png",
+		"default_title": "Readable Arabic"
+	}
+}
