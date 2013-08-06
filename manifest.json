@@ -22,7 +22,7 @@
         "http://*/*",
         "https://*/*"
       ],
-      "js" : ["jquery.js","/HL/highlight.js", "script.js"],
+      "js" : ["jquery.js","/HL/highlight_2.js", "script.js"],
       "css" : ["arabic.css"],
       "run_at" : "document_idle",
       "all_frames" : true

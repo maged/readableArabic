@@ -23,20 +23,26 @@ var highlight = function(nodes, pattern) {
             if (pos >= 0 && node.data.length > 0) { // .* matching "" causes infinite loop
                 var match = node.data.match(regex); // get the match(es), but we would only handle the 1st one, hence /g is not recommended
                 var spanNode = document.createElement('span');
-                spanNode.className = 'highlight'; // set css
+                spanNode.className = 'ar_highlight'; // set css
                 var middleBit = node.splitText(pos); // split to 2 nodes, node contains the pre-pos text, middleBit has the post-pos
+
+                spaceRegex = new RegExp('[0-9 ]', "i")
 
                 var middleLength = match[0].length;
                 for (var i = 1; i < middleBit.data.length; i++ ){
-                    if ( middleBit.data.substring(i).search(regex) == 0 ) 
+                    if ( middleBit.data.substring(i).search(regex) == 0  || middleBit.data.substring(i).search(spaceRegex) == 0 ) 
                         middleLength = middleLength + 1;
+                    else{
+                      var endBit = middleBit.splitText(middleLength); // similarly split middleBit to 2 nodesYetTraversed
+                      var endBit = middleBit.splitText(middleLength); // similarly split middleBit to 2 nodes
+                      var middleClone = middleBit.cloneNode(true);
+                      spanNode.appendChild(middleClone);
+                      // parentNode ie. node, now has 3 nodes by 2 splitText()s, replace the middle with the highlighted spanNode:
+                      middleBit.parentNode.replaceChild(spanNode, middleBit); 
+                      skip += 1; // skip this middleBit, but still need to check endBit
+                      continue;
+                    }
                 }
-                var endBit = middleBit.splitText(middleLength); // similarly split middleBit to 2 nodes
-                var middleClone = middleBit.cloneNode(true);
-                spanNode.appendChild(middleClone);
-                // parentNode ie. node, now has 3 nodes by 2 splitText()s, replace the middle with the highlighted spanNode:
-                middleBit.parentNode.replaceChild(spanNode, middleBit); 
-                skip = 1; // skip this middleBit, but still need to check endBit
             }
         } else if (node.nodeType === 1 && node.childNodes && !/(script|style)/i.test(node.tagName)) { // 1 - Element node
             for (var i = 0; i < node.childNodes.length; i++) { // highlight all children

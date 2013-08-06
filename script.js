@@ -14,7 +14,7 @@ chrome.runtime.onMessage.addListener(
 
 	  		
 	  		nodes = grepNodes('[\u0600-\u06FF]');
-	  		highlight(nodes, '[\u0600-\u06FF]');
+	  		highlight(nodes, '[a-zA-Z]');
 	  		doneOnce = true; 
 	  		//combineHL();
 	  	}
