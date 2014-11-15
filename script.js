@@ -1,19 +1,45 @@
 var on = false; 
 var doneOnce = false;
-var nodes = []
+documentEdited = false; 
+var nodes = [];
+lock = null; // primitive lock - are race conditions the bug cause?
+
+//TODO: only send message if Arabic text is present
+chrome.runtime.sendMessage( {greeting : "hey"} );
+
+
 $( document ).ready(function() {
-    chrome.runtime.sendMessage( {greeting : "hey"}, function(response) {
-        ;//nothing special
-    });
+    // document is ready, set up icon
+    //console.log("document ready");
+
+/*
+    if (!documentEdited){
+        documentEdited = true; // were reevaluating page html
+                                // document ready will be called multiple times
+
+        //console.log("recieved nodes.")
+        nodes = getNodes('[\u0600-\u06FF]');
+    }
+*/
+
 });
+
 
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-        if (!on) {
-            nodes = getNodes('[\u0600-\u06FF]');
+        // icon has been clicked
+        //console.log("greeting recieved " + request.greeting);
+        if (request.greeting == "hey"){
+            if (!on) {
+                //console.log("called getNodes. " + lock);
+                nodes = add_highlight();
+            }
+            else {
+                //console.log("removing highlights.\n");
+                rm_highlight(nodes);
+            }
+            on = !on;
         }
-        else {
-            rmHighlight(nodes);
-        }
-        on = !on;
 });
+
+
