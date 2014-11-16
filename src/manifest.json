@@ -19,9 +19,8 @@
 	"content_scripts" : [
     {
       "matches" : [
-        "http://*/*",
-        "https://*/*"
-      ],
+        "<all_urls>"
+       ],
       "js" : ["jquery.js","/HL/highlight.js", "script.js"],
       "css" : ["arabic.css"],
       "run_at" : "document_idle",

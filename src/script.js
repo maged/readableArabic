@@ -31,12 +31,12 @@ chrome.runtime.onMessage.addListener(
         //console.log("greeting recieved " + request.greeting);
         if (request.greeting == "hey"){
             if (!on) {
-                //console.log("called getNodes. " + lock);
-                nodes = add_highlight();
+                console.log("called getNodes. " + lock);
+                nodes = addHighlight();
             }
             else {
-                //console.log("removing highlights.\n");
-                rm_highlight(nodes);
+                console.log("removing highlights.\n");
+                rmHighlight(nodes);
             }
             on = !on;
         }
