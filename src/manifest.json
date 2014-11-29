@@ -3,7 +3,7 @@
 
 	"name": "Readable Arabic",
 	"description": "Makes Arabic a little more readable on the web",
-	"version": "1.0",
+	"version": "2.0",
 	"background": {
 		"page": "background.html"
 	},

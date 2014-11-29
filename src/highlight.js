@@ -1,6 +1,4 @@
 function addHighlight() {
-    console.log("UPDATED!!");
-
     var arabic_reg = new RegExp('[\u0600-\u06FF]', 'g');
     // Arabic or whitespace or punctuation.
     var arabic_plus_reg = new RegExp('[ .\u0600-\u06FF\p]');
