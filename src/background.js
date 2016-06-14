@@ -2,7 +2,7 @@
     function(request, sender, sendResponse) {
     	// page script sent confirmation
     	//will add icon to omnibar
-        var img = 'smallicon.png';
+        var img = 'icon.png';
         chrome.pageAction.show(sender.tab.id);
         chrome.pageAction.setIcon( {tabId: sender.tab.id, path: img} );
  });
